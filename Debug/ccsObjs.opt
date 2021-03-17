@@ -1,0 +1,1 @@
+"./ELEX7890_main.obj" "./F28027_I2C_LCD.obj" "./NAU7802_ADC.obj" "../F28027.cmd" "../F2802x_Headers_nonBIOS.cmd" "../driverlib.lib" -llibc.a 
