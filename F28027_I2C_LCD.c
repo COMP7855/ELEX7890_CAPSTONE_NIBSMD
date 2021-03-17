@@ -12,6 +12,15 @@
 
 #include <F28027_I2C_LCD.h>
 
+uint8_t _Addr;
+uint8_t _displayfunction;
+uint8_t _displaycontrol;
+uint8_t _displaymode;
+uint8_t _numlines;
+uint8_t _cols;
+uint8_t _rows;
+uint8_t _backlightval;
+
 void DELAY_MS(uint16_t _ms)
 {
     uint16_t A = _ms * 1000;

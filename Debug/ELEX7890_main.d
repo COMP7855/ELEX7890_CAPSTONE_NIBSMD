@@ -43,6 +43,7 @@ ELEX7890_main.obj: H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/in
 ELEX7890_main.obj: H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/timer.h
 ELEX7890_main.obj: H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/i2c.h
 ELEX7890_main.obj: H:/Workspace/ELEX7890/ELEX7890_CAPSTONE_NIBSMD/NAU7802_ADC.h
+ELEX7890_main.obj: H:/Workspace/ELEX7890/ELEX7890_CAPSTONE_NIBSMD/F28027_I2C_LCD.h
 
 ../ELEX7890_main.c: 
 H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/DSP28x_Project.h: 
@@ -87,3 +88,4 @@ H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/gpio.h:
 H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/timer.h: 
 H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/i2c.h: 
 H:/Workspace/ELEX7890/ELEX7890_CAPSTONE_NIBSMD/NAU7802_ADC.h: 
+H:/Workspace/ELEX7890/ELEX7890_CAPSTONE_NIBSMD/F28027_I2C_LCD.h: 

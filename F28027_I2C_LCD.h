@@ -70,15 +70,6 @@ extern CPU_Handle myCpu;
 extern PLL_Handle myPll;
 extern WDOG_Handle myWDog;
 
-uint8_t _Addr;
-uint8_t _displayfunction;
-uint8_t _displaycontrol;
-uint8_t _displaymode;
-uint8_t _numlines;
-uint8_t _cols;
-uint8_t _rows;
-uint8_t _backlightval;
-
 void DELAY_MS(uint16_t _ms);
 void init_I2C(uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows);
 void init_LCD(void);

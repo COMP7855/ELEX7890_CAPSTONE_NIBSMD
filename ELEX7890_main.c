@@ -24,6 +24,7 @@
 #include "timer.h"
 #include "i2c.h"
 #include <NAU7802_ADC.h>
+#include <F28027_I2C_LCD.h>
 
 // Create handles for drivers
 CLK_Handle myClk;
@@ -36,14 +37,6 @@ WDOG_Handle myWDog;
 
 void Setup_handles();
 void Init_system();
-void init_I2C(uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows);
-void init_LCD();
-void backlight();
-void cursor();
-void blink();
-void setCursor(uint8_t, uint8_t);
-void writeNum(uint8_t);
-void writeStr(const char *str);
 
 void main(void)
 {
@@ -63,7 +56,8 @@ void main(void)
         setCursor (0,0);  // go to the top left corner
         writeStr("ELEX7890 NIBSMD");
         setCursor (0,1);
-        writeNum(5);
+        writeStr("Result:");
+        writeNum(adcConvResult);
     }
 }
 
