@@ -71,12 +71,13 @@ float AdcInitConversion(void)
 
             return adcConvResultVolts;
     }
+    return 0;
 }
 
 void AdcWrite(uint16_t adcRegAddr, uint16_t dataByte)
 {
     // Transmit data on the I2C bus
-
+    I2caRegs.I2CSAR = NAU7802_I2C_SLAVE_ADDR;
     I2caRegs.I2CCNT = 2;        // number of data bytes
     I2caRegs.I2CDXR = adcRegAddr;     // load data into the transmit register
     I2caRegs.I2CMDR.all = I2C_START_STOP_TRANSMIT;    // start transmitting
@@ -94,10 +95,10 @@ uint16_t AdcRead(uint16_t RegAddr)
     // Read data on the I2C bus
 
     // transmit register address to read
-
+    I2caRegs.I2CSAR = NAU7802_I2C_SLAVE_ADDR;
     I2caRegs.I2CCNT = 1;        // number of data bytes to transmit
     I2caRegs.I2CDXR = RegAddr;     // load data into the transmit register
-    I2caRegs.I2CMDR.all = I2C_START_NOSTOP_TRANSMIT;    // start transmitting
+    I2caRegs.I2CMDR.all = I2C_START_STOP_TRANSMIT;    // start transmitting
     while (I2caRegs.I2CSTR.bit.XRDY != 1);  // wait for transmit register available
     bytesSent++;
 
@@ -105,7 +106,7 @@ uint16_t AdcRead(uint16_t RegAddr)
 
     I2caRegs.I2CCNT = 1;        // number of data bytes to receive
     I2caRegs.I2CMDR.bit.TRX = 0;    // receive mode (R/W = 1)
-    I2caRegs.I2CMDR.all = I2C_START_NOSTOP_RECEIVE;    // start receive mode
+    I2caRegs.I2CMDR.all = I2C_START_STOP_RECEIVE;    // start receive mode
     while (I2caRegs.I2CSTR.bit.RRDY != 1);        // wait until the data receive register is ready to be read
     bytesReceived++;
     uint16_t data = I2caRegs.I2CDRR;
@@ -120,15 +121,6 @@ void ConfigI2C(void)
     CLK_enableI2cClock(myClk);
 
     ConfigI2cClock(); // Set I2C clock to 10 Khz
-
-    I2caRegs.I2CSAR = NAU7802_I2C_SLAVE_ADDR;     // load slave address
-
-    /*
-    I2caRegs.I2CMDR.bit.MST = 1;    // master mode
-    I2caRegs.I2CMDR.bit.XA = 0;    // 7-bit address format (expanded addr disabled)
-    I2caRegs.I2CMDR.bit.FDF = 0;    // 7-bit address format (free data format disabled)
-    I2caRegs.I2CMDR.bit.BC = 0;     // n = 8 data bits in each message
-    */
 }
 
 void ConfigI2cClock(void)

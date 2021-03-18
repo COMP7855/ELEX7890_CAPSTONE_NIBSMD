@@ -48,13 +48,14 @@ void main(void)
     cursor();
     blink();
     ConfigI2C(); // set up I2C register values for communication with ADC
+    AdcPowerOnSequence();
 
     for(;;)
     {
-        AdcGetStatus();
-        float adcConvResult = AdcInitConversion();
         setCursor (0,0);  // go to the top left corner
         writeStr("ELEX7890 NIBSMD");
+        AdcGetStatus();
+        float adcConvResult = AdcInitConversion();
         setCursor (0,1);
         writeStr("Result:");
         writeNum(adcConvResult);
