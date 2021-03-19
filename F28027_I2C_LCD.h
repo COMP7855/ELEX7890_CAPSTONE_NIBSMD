@@ -61,6 +61,7 @@
 #include "pll.h"
 #include "wdog.h"
 #include "gpio.h"
+#include <math.h>
 // Link external handles for drivers
 extern CLK_Handle myClk;
 extern FLASH_Handle myFlash;
@@ -77,7 +78,7 @@ void begin(uint8_t cols, uint8_t rows, uint8_t dotsize);
 void command(uint8_t);
 void send(uint8_t, uint8_t);
 void write(uint8_t);
-void writeNum(uint8_t);
+void writeNum(float, uint8_t);
 void writeStr(const char *str);
 void write4bits(uint8_t);
 void expanderWrite(uint8_t);
@@ -99,5 +100,8 @@ void backlight();
 void autoscroll();
 void noAutoscroll();
 void setCursor(uint8_t, uint8_t);
+void ftoa(float n, char* res, int afterpoint);
+int intToStr(int x, char str[], int d);
+void reverse(char* str, int len);
 
 #endif /* F28027_I2C_LCD_H_ */

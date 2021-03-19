@@ -41,6 +41,8 @@ F28027_I2C_LCD.obj: H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/i
 F28027_I2C_LCD.obj: H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/pll.h
 F28027_I2C_LCD.obj: H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/wdog.h
 F28027_I2C_LCD.obj: H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/gpio.h
+F28027_I2C_LCD.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.4.LTS/include/math.h
+F28027_I2C_LCD.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.4.LTS/include/_defs.h
 
 ../F28027_I2C_LCD.c: 
 H:/Workspace/ELEX7890/ELEX7890_CAPSTONE_NIBSMD/F28027_I2C_LCD.h: 
@@ -83,3 +85,5 @@ H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/adc.h:
 H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/pll.h: 
 H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/wdog.h: 
 H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/gpio.h: 
+C:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.4.LTS/include/math.h: 
+C:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.4.LTS/include/_defs.h: 

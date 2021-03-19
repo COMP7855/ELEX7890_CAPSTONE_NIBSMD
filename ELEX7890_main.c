@@ -23,6 +23,7 @@
 #include "adc.h"
 #include "timer.h"
 #include "i2c.h"
+#include <math.h>
 #include <NAU7802_ADC.h>
 #include <F28027_I2C_LCD.h>
 
@@ -56,9 +57,10 @@ void main(void)
         writeStr("ELEX7890 NIBSMD");
         AdcGetStatus();
         float adcConvResult = AdcInitConversion();
+        DELAY_US(2000);
         setCursor (0,1);
         writeStr("Result:");
-        writeNum(adcConvResult);
+        writeNum(adcConvResult,3);
     }
 }
 

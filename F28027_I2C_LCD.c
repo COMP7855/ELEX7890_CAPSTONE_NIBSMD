@@ -111,10 +111,50 @@ void write(uint8_t value)
 }
 
 // Write a Number to the display
-void writeNum(uint8_t value)
+void writeNum(float number, uint8_t decimal)
 {
-    value = value + 48;
-    send(value, Rs);
+    char res[20];
+    ftoa(number, res, decimal);
+    writeStr(res);
+}
+// Converts a float to a string
+void ftoa(float n, char* res, int afterpoint)
+{
+    int ipart = (int)n;
+    float fpart = n - (float)ipart;
+    int i = intToStr(ipart, res, 0);
+    if (afterpoint != 0) {
+        res[i] = '.'; // add dot
+        fpart = fpart * pow(10, afterpoint);
+        intToStr((int)fpart, res + i + 1, afterpoint);
+    }
+}
+// Converts an integer to string
+int intToStr(int x, char str[], int d)
+{
+    int i = 0;
+    while (x) {
+        str[i++] = (x % 10) + '0';
+        x = x / 10;
+    }
+    while (i < d)
+        str[i++] = '0';
+
+    reverse(str, i);
+    str[i] = '\0';
+    return i;
+}
+// Reverse a string
+void reverse(char* str, int len)
+{
+    int i = 0, j = len - 1, temp;
+    while (i < j) {
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+        i++;
+        j--;
+    }
 }
 
 // Write a String of characters to the display
@@ -136,7 +176,7 @@ void expanderWrite(uint8_t _data)
 {
     while (I2caRegs.I2CMDR.bit.STP == 1);  // wait for STOP condition
     I2caRegs.I2CSAR = _Addr;     // load slave address
-    while (I2caRegs.I2CSTR.bit.BB == 1);// Check if bus busy
+    //while (I2caRegs.I2CSTR.bit.BB == 1);// Check if bus busy
     I2caRegs.I2CCNT = I2C_NUMBYTES;     // Setup number of bytes to send
     I2caRegs.I2CDXR = (_data | _backlightval);     // load data into the transmit register
     I2caRegs.I2CMDR.all = 0x6E20; // Send start as master transmitter

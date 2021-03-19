@@ -106,7 +106,7 @@ uint16_t AdcRead(uint16_t RegAddr)
 
     I2caRegs.I2CCNT = 1;        // number of data bytes to receive
     I2caRegs.I2CMDR.bit.TRX = 0;    // receive mode (R/W = 1)
-    I2caRegs.I2CMDR.all = I2C_START_STOP_RECEIVE;    // start receive mode
+    I2caRegs.I2CMDR.all = I2C_START_NOSTOP_RECEIVE;    // start receive mode
     while (I2caRegs.I2CSTR.bit.RRDY != 1);        // wait until the data receive register is ready to be read
     bytesReceived++;
     uint16_t data = I2caRegs.I2CDRR;

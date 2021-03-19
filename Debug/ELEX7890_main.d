@@ -42,6 +42,8 @@ ELEX7890_main.obj: H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/in
 ELEX7890_main.obj: H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/gpio.h
 ELEX7890_main.obj: H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/timer.h
 ELEX7890_main.obj: H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/i2c.h
+ELEX7890_main.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.4.LTS/include/math.h
+ELEX7890_main.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.4.LTS/include/_defs.h
 ELEX7890_main.obj: H:/Workspace/ELEX7890/ELEX7890_CAPSTONE_NIBSMD/NAU7802_ADC.h
 ELEX7890_main.obj: H:/Workspace/ELEX7890/ELEX7890_CAPSTONE_NIBSMD/F28027_I2C_LCD.h
 
@@ -87,5 +89,7 @@ H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/wdog.h:
 H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/gpio.h: 
 H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/timer.h: 
 H:/Workspace/ELEX7890/RemoteSystemsTempFiles/f2802x_common/include/i2c.h: 
+C:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.4.LTS/include/math.h: 
+C:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.4.LTS/include/_defs.h: 
 H:/Workspace/ELEX7890/ELEX7890_CAPSTONE_NIBSMD/NAU7802_ADC.h: 
 H:/Workspace/ELEX7890/ELEX7890_CAPSTONE_NIBSMD/F28027_I2C_LCD.h: 
