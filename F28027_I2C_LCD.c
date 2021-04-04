@@ -37,6 +37,9 @@ void init_I2C(uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows)
 
 void init_LCD(void)
 {
+    GPIO_setPullUp(myGpio, GPIO_Number_12, GPIO_PullUp_Enable);
+    GPIO_setMode(myGpio, GPIO_Number_12, GPIO_12_Mode_GeneralPurpose);
+    GPIO_setDirection(myGpio, GPIO_Number_12, GPIO_Direction_Input);
     GPIO_setPullUp(myGpio, GPIO_Number_32, GPIO_PullUp_Enable);
     GPIO_setPullUp(myGpio, GPIO_Number_33, GPIO_PullUp_Enable);
     GPIO_setQualification(myGpio, GPIO_Number_32, GPIO_Qual_ASync);
@@ -179,7 +182,7 @@ void expanderWrite(uint8_t _data)
     //while (I2caRegs.I2CSTR.bit.BB == 1);// Check if bus busy
     I2caRegs.I2CCNT = I2C_NUMBYTES;     // Setup number of bytes to send
     I2caRegs.I2CDXR = (_data | _backlightval);     // load data into the transmit register
-    I2caRegs.I2CMDR.all = 0x6E20; // Send start as master transmitter
+    I2caRegs.I2CMDR.all = 0x2E20; // Send start as master transmitter
 }
 
 void pulseEnable(uint8_t _data)

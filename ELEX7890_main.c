@@ -46,20 +46,35 @@ void main(void)
     init_I2C(0x27,20,4);
     init_LCD();
     backlight();
-    cursor();
-    blink();
-    ConfigI2C(); // set up I2C register values for communication with ADC
     AdcPowerOnSequence();
     setCursor (0,0);  // go to the top left corner
     writeStr("ELEX7890 NIBSMD");
     for(;;)
     {
-        AdcGetStatus();
-        float adcConvResult = AdcInitConversion();
-        setCursor (0,1);
-        writeStr("Result:");
-        writeNum(adcConvResult*100,3);
-        //writeStr("mV");
+        int i;
+        float adcConvResult[100];
+        float aveResult, finResult;
+        if(GPIO_getData(myGpio, GPIO_Number_12) == 1)
+        {
+            for(i = 0; i < 100; i++)
+            {
+                AdcGetStatus();
+                adcConvResult[i] = AdcInitConversion();
+            }
+            aveResult = 0;
+            for(i = 0; i < 100; i++)
+            {
+                aveResult = aveResult + adcConvResult[i];
+            }
+            finResult = aveResult/100;
+        }
+        else
+        {
+            setCursor (0,1);
+            writeStr("Result:");
+            writeNum(finResult*100,3);
+            writeStr(" mV   ");
+        }
     }
 }
 
