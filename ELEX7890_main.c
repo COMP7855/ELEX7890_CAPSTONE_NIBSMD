@@ -44,9 +44,11 @@ void main(void)
     Setup_handles();
     Init_system();
     init_I2C(0x27,20,4);
+    init_I2C_GPIO();
+    init_I2C_Clk();
     init_LCD();
     backlight();
-    AdcPowerOnSequence();
+    while(!AdcPowerOnSequence());
     setCursor (0,0);  // go to the top left corner
     writeStr("ELEX7890 NIBSMD");
     for(;;)
@@ -54,8 +56,8 @@ void main(void)
         int i;
         float adcConvResult[100];
         float aveResult, finResult;
-        if(GPIO_getData(myGpio, GPIO_Number_12) == 1)
-        {
+        //if(GPIO_getData(myGpio, GPIO_Number_12) == 1)
+        //{
             for(i = 0; i < 100; i++)
             {
                 AdcGetStatus();
@@ -67,14 +69,18 @@ void main(void)
                 aveResult = aveResult + adcConvResult[i];
             }
             finResult = aveResult/100;
-        }
-        else
-        {
             setCursor (0,1);
             writeStr("Result:");
-            writeNum(finResult*100,3);
+            writeNum(finResult*1000,3);
             writeStr(" mV   ");
-        }
+        //}
+        //else
+        //{
+        //    setCursor (0,1);
+        //    writeStr("Result:");
+        //    writeNum(finResult*100,3);
+        //    writeStr(" mV   ");
+        //}
     }
 }
 

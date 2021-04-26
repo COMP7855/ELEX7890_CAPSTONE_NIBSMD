@@ -73,6 +73,8 @@ extern WDOG_Handle myWDog;
 
 void DELAY_MS(uint16_t _ms);
 void init_I2C(uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows);
+void init_I2C_GPIO(void);
+void init_I2C_Clk(void);
 void init_LCD(void);
 void begin(uint8_t cols, uint8_t rows, uint8_t dotsize);
 void command(uint8_t);

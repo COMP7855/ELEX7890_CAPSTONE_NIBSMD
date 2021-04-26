@@ -55,9 +55,9 @@ float AdcInitConversion(void)
     AdcWrite(NAU7802_REG_PU_CTRL, PU_CTRL_PUA | PU_CTRL_PUD | PU_CTRL_CS);
 
     // check the Cycle Ready bit
-    AdcGetStatus();
-    if(adcStCycleReady)
-    {
+    while(!adcStCycleReady) AdcGetStatus();
+    //if(adcStCycleReady)
+    //{
         // read ADC conversion result
             uint32_t adcConvResultB2 = AdcRead(NAU7802_REG_ADCO_B2);
             uint32_t adcConvResultB1 = AdcRead(NAU7802_REG_ADCO_B1);
@@ -68,8 +68,8 @@ float AdcInitConversion(void)
             float adcConvResultVolts = adcConvResultConcat * AdcMaxVolts / AdcMaxVal;
 
             return adcConvResultVolts;
-    }
-    return 0;
+    //}
+    //return 0;
 }
 
 void AdcWrite(uint16_t adcRegAddr, uint16_t dataByte)
@@ -105,7 +105,7 @@ uint16_t AdcRead(uint16_t RegAddr)
     I2caRegs.I2CCNT = 1;        // number of data bytes to receive
     //I2caRegs.I2CMDR.bit.TRX = 0;    // receive mode (R/W = 1)
     I2caRegs.I2CMDR.all = I2C_START_NOSTOP_RECEIVE;    // start receive mode
-    //while (I2caRegs.I2CSTR.bit.RRDY != 1);        // wait until the data receive register is ready to be read
+    while (I2caRegs.I2CSTR.bit.RRDY != 1);        // wait until the data receive register is ready to be read
     bytesReceived++;
     uint16_t data = I2caRegs.I2CDRR;
 

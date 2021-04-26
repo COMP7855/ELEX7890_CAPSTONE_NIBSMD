@@ -35,17 +35,24 @@ void init_I2C(uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows)
   _backlightval = LCD_NOBACKLIGHT;
 }
 
-void init_LCD(void)
+void init_I2C_GPIO(void)
 {
     GPIO_setPullUp(myGpio, GPIO_Number_12, GPIO_PullUp_Enable);
     GPIO_setMode(myGpio, GPIO_Number_12, GPIO_12_Mode_GeneralPurpose);
     GPIO_setDirection(myGpio, GPIO_Number_12, GPIO_Direction_Input);
+
     GPIO_setPullUp(myGpio, GPIO_Number_32, GPIO_PullUp_Enable);
     GPIO_setPullUp(myGpio, GPIO_Number_33, GPIO_PullUp_Enable);
+
     GPIO_setQualification(myGpio, GPIO_Number_32, GPIO_Qual_ASync);
     GPIO_setQualification(myGpio, GPIO_Number_33, GPIO_Qual_ASync);
+
     GPIO_setMode(myGpio, GPIO_Number_32, GPIO_32_Mode_SDAA);
     GPIO_setMode(myGpio, GPIO_Number_33, GPIO_33_Mode_SCLA);
+}
+
+void init_I2C_Clk(void)
+{
     CLK_enableI2cClock(myClk);
     I2caRegs.I2CMDR.bit.IRS = 0; // set I2C module into reset state
     // I2CCLK(Fmod) = SYSCLK/(I2CPSC+1)
@@ -56,9 +63,13 @@ void init_LCD(void)
       I2caRegs.I2CPSC.all = 5;       // Prescaler - need 7-12 Mhz on module clk
     #endif
     // MSTCLK(Tmst) = [(ICCH+d)+(ICCL+d)]/(Fmod)
-    I2caRegs.I2CCLKL = 45;           // NOTE: must be non zero
-    I2caRegs.I2CCLKH = 45;            // NOTE: must be non zero
+    I2caRegs.I2CCLKL = 495;           // NOTE: must be non zero
+    I2caRegs.I2CCLKH = 495;            // NOTE: must be non zero
     I2caRegs.I2CMDR.bit.IRS = 1; // set I2C module out of reset state
+}
+
+void init_LCD(void)
+{
     while (I2caRegs.I2CMDR.bit.STP != 0);    // wait for STOP condition
 
     _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
