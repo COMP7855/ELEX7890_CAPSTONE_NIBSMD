@@ -40,7 +40,8 @@ bool AdcPowerOnSequence(void)
 
 void AdcGetStatus(void)
 {
-    uint16_t adcResponse = AdcRead(NAU7802_REG_PU_CTRL);
+    uint16_t adcResponse;
+    adcResponse = AdcRead(NAU7802_REG_PU_CTRL);
     adcStPwrUpReady = adcResponse & PU_CTRL_PUR;
     adcStDigPower = adcResponse & PU_CTRL_PUD;
     adcStAnaPower = adcResponse & PU_CTRL_PUA;
@@ -91,6 +92,8 @@ void AdcWrite(uint16_t adcRegAddr, uint16_t dataByte)
 uint16_t AdcRead(uint16_t RegAddr)
 {
     // Read data on the I2C bus
+
+    while (I2caRegs.I2CMDR.bit.STP == 1);  // wait for STOP condition
 
     // transmit register address to read
     I2caRegs.I2CSAR = NAU7802_I2C_SLAVE_ADDR;

@@ -63,8 +63,8 @@ void init_I2C_Clk(void)
       I2caRegs.I2CPSC.all = 5;       // Prescaler - need 7-12 Mhz on module clk
     #endif
     // MSTCLK(Tmst) = [(ICCH+d)+(ICCL+d)]/(Fmod)
-    I2caRegs.I2CCLKL = 495;           // NOTE: must be non zero
-    I2caRegs.I2CCLKH = 495;            // NOTE: must be non zero
+    I2caRegs.I2CCLKL = 45;           // NOTE: must be non zero
+    I2caRegs.I2CCLKH = 45;            // NOTE: must be non zero
     I2caRegs.I2CMDR.bit.IRS = 1; // set I2C module out of reset state
 }
 

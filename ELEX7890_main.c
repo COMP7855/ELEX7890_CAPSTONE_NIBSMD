@@ -54,21 +54,21 @@ void main(void)
     for(;;)
     {
         int i;
-        float adcConvResult[100];
+        float adcConvResult[20];
         float aveResult, finResult;
         //if(GPIO_getData(myGpio, GPIO_Number_12) == 1)
         //{
-            for(i = 0; i < 100; i++)
+            for(i = 0; i < 20; i++)
             {
                 AdcGetStatus();
                 adcConvResult[i] = AdcInitConversion();
             }
             aveResult = 0;
-            for(i = 0; i < 100; i++)
+            for(i = 0; i < 20; i++)
             {
                 aveResult = aveResult + adcConvResult[i];
             }
-            finResult = aveResult/100;
+            finResult = aveResult/20;
             setCursor (0,1);
             writeStr("Result:");
             writeNum(finResult*1000,3);
