@@ -48,6 +48,7 @@ void main(void)
     init_I2C_Clk();
     init_LCD();
     backlight();
+    GPIO_setHigh(myGpio,GPIO_Number_0); // set enable signal for optical sensor
     while(!AdcPowerOnSequence());
     setCursor (0,0);  // go to the top left corner
     writeStr("ELEX7890 NIBSMD");

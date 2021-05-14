@@ -41,6 +41,10 @@ void init_I2C_GPIO(void)
     GPIO_setMode(myGpio, GPIO_Number_12, GPIO_12_Mode_GeneralPurpose);
     GPIO_setDirection(myGpio, GPIO_Number_12, GPIO_Direction_Input);
 
+    GPIO_setPullUp(myGpio, GPIO_Number_0, GPIO_PullUp_Enable);
+    GPIO_setMode(myGpio, GPIO_Number_0, GPIO_0_Mode_GeneralPurpose);
+    GPIO_setDirection(myGpio, GPIO_Number_0, GPIO_Direction_Output);
+
     GPIO_setPullUp(myGpio, GPIO_Number_32, GPIO_PullUp_Enable);
     GPIO_setPullUp(myGpio, GPIO_Number_33, GPIO_PullUp_Enable);
 
