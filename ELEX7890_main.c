@@ -55,7 +55,7 @@ void main(void)
     {
         int i;
         float adcConvResult[20];
-        float aveResult, finResult;
+        float aveResult, finResultMV, finResultBG;
         //if(GPIO_getData(myGpio, GPIO_Number_12) == 1)
         //{
             for(i = 0; i < 20; i++)
@@ -68,11 +68,12 @@ void main(void)
             {
                 aveResult = aveResult + adcConvResult[i];
             }
-            finResult = aveResult/20;
+            finResultMV = 1000 * aveResult/20;
+            finResultBG = (finResultMV - 1477.4) / -77.673;
             setCursor (0,1);
             writeStr("Result:");
-            writeNum(finResult*1000,3);
-            writeStr(" mV   ");
+            writeNum(finResultBG,1);
+            writeStr(" mmol/L   ");
         //}
         //else
         //{
