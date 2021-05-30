@@ -1,12 +1,12 @@
 //#############################################################################
 //
-//  File:   F28027_LCD_I2C_main.c
+//  File:   ELEX7890_main.c
 //
-//  Title:  F28027 connect to LCD via I2C main file
+//  Title:  ELEX 7890 Capstone NIBSMD Main File
 //
-//  Created on: 2021Äê03ÔÂ17ÈÕ
+//  Created on: 2021-03-17
 //
-//  Author: Jie Kang
+//  Authors: Jie Kang & Joshua Penner
 //
 //#############################################################################
 
@@ -41,49 +41,55 @@ void Init_system();
 
 void main(void)
 {
-    Setup_handles();
-    Init_system();
-    init_I2C(0x27,20,4);
-    init_I2C_GPIO();
-    init_I2C_Clk();
-    init_LCD();
-    backlight();
-    GPIO_setHigh(myGpio,GPIO_Number_0); // set enable signal for optical sensor
-    while(!AdcPowerOnSequence());
-    setCursor (0,0);  // go to the top left corner
-    writeStr("ELEX7890 NIBSMD");
-    for(;;)
-    {
-        int i;
-        float adcConvResult[20];
-        float aveResult, finResultMV, finResultBG;
-        //if(GPIO_getData(myGpio, GPIO_Number_12) == 1)
-        //{
+    // Initialize system
+        Setup_handles();
+        Init_system();
+
+        // Initialize I2C gpio and clk
+        init_I2C_GPIO();
+        init_I2C_Clk();
+
+        // Initialize LCD
+        init_I2C(0x27,20,4);
+        init_LCD();
+        backlight();
+        setCursor (0,0);  // go to the top left corner
+        writeStr("ELEX7890 NIBSMD");
+
+        // Initialize ADC
+        while(!AdcPowerOnSequence());
+
+        // set "enable" signal for optical sensor
+        GPIO_setHigh(myGpio,GPIO_Number_0);
+
+        for(;;)
+        {
+            int i;
+            float adcConvResult[20];
+            float aveResult, finResultMV, finResultBG;
+            // collect 20 results in mV
             for(i = 0; i < 20; i++)
             {
                 AdcGetStatus();
                 adcConvResult[i] = AdcInitConversion();
             }
+            // calculate average result
             aveResult = 0;
             for(i = 0; i < 20; i++)
             {
                 aveResult = aveResult + adcConvResult[i];
             }
             finResultMV = 1000 * aveResult/20;
+
+            // convert from mV to blood glucose in mmol/L
             finResultBG = (finResultMV - 1477.4) / -77.673;
+
+            // Display result
             setCursor (0,1);
             writeStr("Result:");
             writeNum(finResultBG,1);
             writeStr(" mmol/L   ");
-        //}
-        //else
-        //{
-        //    setCursor (0,1);
-        //    writeStr("Result:");
-        //    writeNum(finResult*100,3);
-        //    writeStr(" mV   ");
-        //}
-    }
+        }
 }
 
 void Setup_handles(void)
